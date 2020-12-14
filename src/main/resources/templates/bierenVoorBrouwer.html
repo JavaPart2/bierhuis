@@ -11,14 +11,6 @@
         </li>
     </ul>
 </div>
-<div th:if="${bieren}">
-    <h1 th:text="|${brouwer.naam} (${brouwer.gemeente})|"></h1>
-    <ul>
-        <li th:each="bier:${bieren}">
-            <a th:text="${bier.naam}" th:href="@{/bieren/{id}/form(id=${bier.id})}"></a>
-        </li>
-    </ul>
-</div>
 
 
 </body>

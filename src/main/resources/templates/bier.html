@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Bierhuis')"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<div th:if="${bier}" th:object="${bier}">
+    <h1 th:text="*{naam}">Biernaam</h1>
+    <p>Alcohol</p>
+    <span th:text="*{alcohol}"></span> %
+    <p>Prijs</p>
+    <span th:text="*{prijs}"></span> €
+
+    <form method="get" th:object="${aantalbakkenForm}" th:action="@{/mandje/}">
+        <label>Aantal
+            <input th:field="*{aantalBakken}" type="number" autofocus required min="2">
+        </label>
+        <span th:errors="*{aantalBakken}"></span>
+        <button>Toevoegen</button>
+    </form>
+
+</div>
+
+</body>
+</html>
