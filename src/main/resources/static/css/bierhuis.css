@@ -1,0 +1,23 @@
+body {
+    font-family: sans-serif;
+}
+
+nav ul {
+    padding: 0.4em 0;
+}
+
+nav li {
+    display: inline;
+}
+
+nav li a {
+    font-weight: bold;
+    padding-left: 0.5em;
+    text-decoration: none;
+    text-underline: blue;
+    vertical-align: middle;
+}
+
+nav li a:hover {
+    color: lightblue;
+}

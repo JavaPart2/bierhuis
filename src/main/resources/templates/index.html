@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Bierhuis')"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<h1>Welkom in het huis van de Belgische bieren</h1>
+<img src="images/bierhuis.jpg" th:src="@{/images/bierhuis.jpg}" alt="bierhuis" >
+
+<p>We hebben momenteel <span th:text="${aantalBieren}"></span> bieren </p>
+</body>
+</html>
