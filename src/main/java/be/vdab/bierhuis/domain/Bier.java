@@ -5,17 +5,17 @@ import java.math.BigDecimal;
 public class Bier {
     private final int id;
     private final String naam;
-    private final Brouwer brouwer;
-    private final Soort soort;
+    private final int brouwerid;
+    private final int soortid;
     private final BigDecimal alcohol;
     private final BigDecimal prijs;
     private int besteld;
 
-    public Bier(int id, String naam, Brouwer brouwer, Soort soort, BigDecimal alcohol, BigDecimal prijs, int besteld) {
+    public Bier(int id, String naam, int brouwer, int soort, BigDecimal alcohol, BigDecimal prijs, int besteld) {
         this.id = id;
         this.naam = naam;
-        this.brouwer = brouwer;
-        this.soort = soort;
+        this.brouwerid = brouwer;
+        this.soortid = soort;
         this.alcohol = alcohol;
         this.prijs = prijs;
         this.besteld = besteld;
@@ -29,12 +29,12 @@ public class Bier {
         return naam;
     }
 
-    public Brouwer getBrouwer() {
-        return brouwer;
+    public int getBrouwerid() {
+        return brouwerid;
     }
 
-    public Soort getSoort() {
-        return soort;
+    public int getSoortid() {
+        return soortid;
     }
 
     public BigDecimal getAlcohol() {

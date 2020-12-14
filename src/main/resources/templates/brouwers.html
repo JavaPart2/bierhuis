@@ -4,10 +4,9 @@
 <body>
 <nav th:replace="fragments::menu"></nav>
 <h1>Brouwers</h1>
-<br>
 <ul>
     <li th:each="brouwer:${brouwers}">
-        <a th:text="${brouwer.naam}" th:href="@{/brouwers/{id}(id=${brouwer.id}})"></a>
+        <a th:text="|${brouwer.naam} (${brouwer.gemeente})|" th:href="@{/brouwers/{id}(id=${brouwer.id})}"></a>
     </li>
 </ul>
 
