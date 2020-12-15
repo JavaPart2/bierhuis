@@ -9,38 +9,46 @@ public class BestelLijnForm {
     private BigDecimal bierPrijs;
     private int aantalBakken;
 
-    public BestelLijnForm() {
+    public BestelLijnForm(int bierId, String bierNaam,
+                          BigDecimal bierPrijs) {
+        this.bierId = bierId;
+        this.bierNaam = bierNaam;
+        this.bierPrijs = bierPrijs;
     }
 
-    public int getBierId() {
-        return bierId;
+    public BestelLijnForm() {
     }
 
     public void setBierId(int bierId) {
         this.bierId = bierId;
     }
 
-    public String getBierNaam() {
-        return bierNaam;
-    }
-
     public void setBierNaam(String bierNaam) {
         this.bierNaam = bierNaam;
-    }
-
-    public BigDecimal getBierPrijs() {
-        return bierPrijs;
     }
 
     public void setBierPrijs(BigDecimal bierPrijs) {
         this.bierPrijs = bierPrijs;
     }
 
+    public void setAantalBakken(int aantalBakken) {
+        this.aantalBakken = aantalBakken;
+    }
+
+    public int getBierId() {
+        return bierId;
+    }
+
+    public String getBierNaam() {
+        return bierNaam;
+    }
+
+    public BigDecimal getBierPrijs() {
+        return bierPrijs;
+    }
+
     public int getAantalBakken() {
         return aantalBakken;
     }
 
-    public void setAantalBakken(int aantalBakken) {
-        this.aantalBakken = aantalBakken;
-    }
 }

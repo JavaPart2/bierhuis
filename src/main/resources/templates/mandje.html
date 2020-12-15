@@ -5,8 +5,8 @@
 <nav th:replace="fragments::menu"></nav>
 <h1>Mandje</h1>
 
-<form method="post" th:action="@{/mandje/bestelbon}">
-    <div th:if="${bestellijst}">
+<form th:object="${mandjeForm}" method="post" th:action="@{/mandje}">
+    <div>
         <table>
             <thead>
             <tr>
@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="lijn:${bestellijst}" th:object="${lijn}">
+            <tr th:each="lijn:${mandjeForm.getBestelLijnen()}" th:object="${lijn}">
                 <td th:text="*{bierNaam}"></td>
                 <td th:text="*{{bierPrijs}}"></td>
                 <td th:text="*{aantalBakken}"></td>
@@ -27,7 +27,7 @@
         </table>
     </div>
 
-    <div th:object="${mandjeForm}">
+    <div>
         <label>Naam <span th:errors="*{naam}"></span>
             <input th:field="*{naam}" autofocus required>
         </label>

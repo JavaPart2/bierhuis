@@ -30,17 +30,4 @@ public class BierController {
         return modelAndView;
     }
 
-/*
-    @GetMapping("aantalbakken/form")
-    public ModelAndView bierForm(@Valid AantalbakkenForm form, Errors errors) {
-        ModelAndView modelAndView = new ModelAndView("mandje");
-        if (errors.hasErrors()){
-            return modelAndView;
-        }
-        return modelAndView.addObject("bieren",
-                bierService.findByPrijsBetween(form.getVan(), form.getTot()));
-
-    }
-*/
-
 }

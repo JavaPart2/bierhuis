@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Bierhuis')"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<div th:if="${bestelbonid}">
+    <h1>Je winkelwagentje is bevestigd als bestelbon
+        <span th:text="${bestelbonid}"></span>
+    </h1>
+</body>
+</html>

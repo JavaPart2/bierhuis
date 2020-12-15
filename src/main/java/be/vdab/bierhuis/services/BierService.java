@@ -15,5 +15,6 @@ public interface BierService {
     List<Bier> findByBrouwer(Brouwer brouwer);
     Optional<Bier> findById(int id);
     void updateBier(Bier bier);
-    List<BestelLijnForm> composeBestelLijstForm(Mandje mandje);
+    MandjeForm composeBestelLijstForm(Mandje mandje);
+    int insertBestelling(MandjeForm form);
 }

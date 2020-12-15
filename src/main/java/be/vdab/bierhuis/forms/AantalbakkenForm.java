@@ -11,6 +11,14 @@ public class AantalbakkenForm {
     public AantalbakkenForm() {
     }
 
+    public AantalbakkenForm(int aantalBakken) {
+        this.aantalBakken = aantalBakken;
+    }
+
+    public void setAantalBakken(int aantalBakken) {
+        this.aantalBakken = aantalBakken;
+    }
+
     public int getAantalBakken() {
         return aantalBakken;
     }
