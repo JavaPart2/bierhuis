@@ -10,7 +10,8 @@
     <p>Prijs</p>
     <span th:text="*{prijs}"></span> €
 
-    <form method="get" th:object="${aantalbakkenForm}" th:action="@{/mandje/}">
+    <form method="get" th:object="${aantalbakkenForm}"
+          th:action="@{/mandje/{id}/{bakken}(id=${bier.id}, bakken=*{aantalBakken}})}">
         <label>Aantal
             <input th:field="*{aantalBakken}" type="number" autofocus required min="2">
         </label>

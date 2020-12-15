@@ -3,23 +3,23 @@ package be.vdab.bierhuis.domain;
 import java.math.BigDecimal;
 
 public class BestelbonLijn {
-    private final Bestelbon bestelbon;
-    private final Bier bier;
+    private final int bestelbon;
+    private final int bier;
     private int aantal;
     private BigDecimal prijs;
 
-    public BestelbonLijn(Bestelbon bestelbon, Bier bier, int aantal, BigDecimal prijs) {
+    public BestelbonLijn(int bestelbon, int bier, int aantal, BigDecimal prijs) {
         this.bestelbon = bestelbon;
         this.bier = bier;
         this.aantal = aantal;
         this.prijs = prijs;
     }
 
-    public Bestelbon getBestelbon() {
+    public int getBestelbon() {
         return bestelbon;
     }
 
-    public Bier getBier() {
+    public int getBier() {
         return bier;
     }
 

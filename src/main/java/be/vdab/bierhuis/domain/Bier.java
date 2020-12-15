@@ -1,5 +1,7 @@
 package be.vdab.bierhuis.domain;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import java.math.BigDecimal;
 
 public class Bier {
@@ -7,7 +9,9 @@ public class Bier {
     private final String naam;
     private final int brouwerid;
     private final int soortid;
+    @NumberFormat(style = NumberFormat.Style.PERCENT, pattern = "0.00")
     private final BigDecimal alcohol;
+    @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "0.00")
     private final BigDecimal prijs;
     private int besteld;
 
