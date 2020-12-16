@@ -39,13 +39,14 @@ public class MandjeController {
     public ModelAndView toonMandje(){
         ModelAndView modelAndView = new ModelAndView("mandje");
         modelAndView.addObject("mandjeForm", bierService.composeBestelLijstForm(mandje));
-//        modelAndView.addObject(new MandjeForm());
+        modelAndView.addObject("mandje","r");
         return modelAndView;
     }
 
     @PostMapping
     public ModelAndView bestellen(@Valid MandjeForm form, Errors errors){
         int bestelbonid = bierService.insertBestelling(form);
+        mandje.leegMaken();
         ModelAndView modelAndView = new ModelAndView("bestelling");
         modelAndView.addObject("bestelbonid", bestelbonid);
         return modelAndView;

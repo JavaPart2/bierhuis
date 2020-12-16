@@ -19,6 +19,7 @@ public class IndexController {
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("aantalBieren", bierService.countAll());
+        modelAndView.addObject("mandje","r");
         return modelAndView;
     }
 }

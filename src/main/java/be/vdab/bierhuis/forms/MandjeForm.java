@@ -1,10 +1,12 @@
 package be.vdab.bierhuis.forms;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class MandjeForm {
 
     private List<BestelLijnForm> bestelLijnen;
+    private BigDecimal totaal;
     private String naam;
     private String straat;
     private String huisNr;
@@ -16,6 +18,14 @@ public class MandjeForm {
 
     public List<BestelLijnForm> getBestelLijnen() {
         return bestelLijnen;
+    }
+
+    public BigDecimal getTotaal() {
+        return totaal;
+    }
+
+    public void setTotaal(BigDecimal totaal) {
+        this.totaal = totaal;
     }
 
     public void setBestelLijnen(List<BestelLijnForm> bestelLijnen) {

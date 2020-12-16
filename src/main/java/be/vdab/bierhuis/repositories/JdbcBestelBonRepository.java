@@ -36,6 +36,6 @@ public class JdbcBestelBonRepository implements BestelBonRepository{
                 "postcode", bestelbon.getPostcode(),
                 "gemeente", bestelbon.getGemeente());
         var id = insert.executeAndReturnKey(kolomWaarden);
-        return (int) id;
+        return id.intValue();
     }
 }

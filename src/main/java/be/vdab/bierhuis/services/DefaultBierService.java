@@ -10,6 +10,7 @@ import be.vdab.bierhuis.repositories.BierRepository;
 import be.vdab.bierhuis.sessions.Mandje;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,9 +53,11 @@ public class DefaultBierService implements BierService{
     public MandjeForm composeBestelLijstForm(Mandje mandje) {
         MandjeForm mandjeForm = new MandjeForm();
         List<BestelLijnForm> bestelLijnFormList = new ArrayList<>();
+        BigDecimal bestelBonPrijsTotaal = new BigDecimal(0);
 
         for (int i = 0; i < mandje.getBierIds().size(); i++) {
             BestelLijnForm bestelLijnForm = new BestelLijnForm();
+
             bierRepository.findById(mandje.getBierIds().get(i)).ifPresent(bier -> {
                 bestelLijnForm.setBierId(bier.getId());
                 bestelLijnForm.setBierNaam(bier.getNaam());
@@ -62,9 +65,15 @@ public class DefaultBierService implements BierService{
 
             });
             bestelLijnForm.setAantalBakken(mandje.getBakken().get(i));
+            bestelLijnForm.setLijnTotaal(
+                    bestelLijnForm.getBierPrijs(),
+                    mandje.getBakken().get(i)
+            );
+            bestelBonPrijsTotaal = bestelBonPrijsTotaal.add(bestelLijnForm.getLijnTotaal());
             bestelLijnFormList.add(bestelLijnForm);
         }
         mandjeForm.setBestelLijnen(bestelLijnFormList);
+        mandjeForm.setTotaal(bestelBonPrijsTotaal);
         return mandjeForm;
     }
 
@@ -88,8 +97,15 @@ public class DefaultBierService implements BierService{
                     form.getBestelLijnen().get(i).getBierPrijs()
             );
             bestelBonLijnService.insertBestelBonLijn(bestelbonLijn);
+            // besteld bier verhogen
+            int aantalBakkenBier = form.getBestelLijnen().get(i).getAantalBakken();
+            bierRepository.findById(form.getBestelLijnen().get(i).getBierId())
+                .ifPresent(bier -> {
+                    bier.setBesteld(bier.getBesteld() + aantalBakkenBier);
+                    bierRepository.updateBier(bier);
+                });
         }
-        return bestelbonid;
 
+        return bestelbonid;
     }
 }

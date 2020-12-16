@@ -10,6 +10,7 @@
         <table>
             <thead>
             <tr>
+                <th></th>
                 <th>Bier</th>
                 <th>Prijs</th>
                 <th>Aantal</th>
@@ -18,13 +19,32 @@
             </thead>
             <tbody>
             <tr th:each="lijn:${mandjeForm.getBestelLijnen()}" th:object="${lijn}">
-                <td th:text="*{bierNaam}"></td>
-                <td th:text="*{{bierPrijs}}"></td>
-                <td th:text="*{aantalBakken}"></td>
-                <td th:text="${lijn.bierPrijs} * ${lijn.aantalBakken}"></td>
+                <td type = hidden th:name="bierId" th:value="*{bierId}"></td>
+                <td th:text="*{bierNaam}" th:name="*{bierNaam}" th:value="*{bierNaam}"></td>
+                <td th:text="*{{bierPrijs}}" th:name="*{bierPrijs}" th:value="*{bierPrijs}"></td>
+                <td th:text="*{aantalBakken}" th:name="*{aantalBakken}" th:value="*{aantalBakken}"></td>
+                <td th:text="*{{lijnTotaal}}" th:value="*{lijnTotaal}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td th:text="Totaal"></td>
+                <td th:text="${{mandjeForm.totaal}}" th:value="${mandjeForm.totaal}"></td>
             </tr>
             </tbody>
         </table>
+
+<!--
+        <input th:each="bierlijn:${mandjeForm.bestelLijnen}" th:object="${bierlijn}"
+                   th:field="*{bierId}"/>
+-->
+<!--
+            <input th:field="*{bierId}">
+            <input  th:field="*{bierNaam}">
+            <input th:field="*{bierPrijs}">
+            <input  th:field="*{aantalBakken}">
+-->
     </div>
 
     <div>
@@ -38,13 +58,13 @@
             <input th:field="*{huisNr}" autofocus required>
         </label>
         <label>Postcode <span th:errors="*{postcode}"></span>
-            <input th:field="*{postcode}" autofocus required>
+            <input th:field="*{postcode}" autofocus required >
         </label>
         <label>Gemeente <span th:errors="*{gemeente}"></span>
             <input th:field="*{gemeente}" autofocus required>
         </label>
-        <input type="hidden" name="id" value="0"/>
-        <button>Toevoegen</button>
+<!--        <input type="hidden" name="id" value="0"/>-->
+        <button>Als bestelbon bevestigen</button>
     </div>
 </form>
 

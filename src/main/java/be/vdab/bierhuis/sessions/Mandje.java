@@ -35,12 +35,18 @@ public class Mandje implements Serializable {
 
     public void voegToe(int id, int bakken){
         if (bierIds.contains(id)){
-            int index = this.bakken.get(bierIds.indexOf(id));
+            int index = bierIds.indexOf(id);
             int aantalBakken = this.bakken.get(index) + bakken;
             this.bakken.set(index,aantalBakken);
         }else {
             this.bierIds.add(id);
             this.bakken.add(bakken);
         }
+    }
+
+    public void leegMaken() {
+        this.bierIds.clear();
+        this.bakken.clear();
+
     }
 }

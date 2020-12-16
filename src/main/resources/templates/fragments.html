@@ -12,6 +12,7 @@
         <ul>
             <li><a th:href="@{/}">Welkom</a></li>
             <li><a th:href="@{/brouwers}">Brouwers</a></li>
+            <li th:if="${mandje}"><a th:href="@{/mandje}">Mandje</a></li>
         </ul>
     </nav>
 </div>

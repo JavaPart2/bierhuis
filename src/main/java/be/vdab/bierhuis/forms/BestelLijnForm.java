@@ -8,6 +8,7 @@ public class BestelLijnForm {
     private String bierNaam;
     private BigDecimal bierPrijs;
     private int aantalBakken;
+    private BigDecimal lijnTotaal;
 
     public BestelLijnForm(int bierId, String bierNaam,
                           BigDecimal bierPrijs) {
@@ -33,6 +34,14 @@ public class BestelLijnForm {
 
     public void setAantalBakken(int aantalBakken) {
         this.aantalBakken = aantalBakken;
+    }
+
+    public BigDecimal getLijnTotaal() {
+        return lijnTotaal;
+    }
+
+    public void setLijnTotaal(BigDecimal prijs, int aantal) {
+        this.lijnTotaal = prijs.multiply(BigDecimal.valueOf(aantal));
     }
 
     public int getBierId() {
