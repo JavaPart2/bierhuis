@@ -78,7 +78,7 @@ public class DefaultBierService implements BierService{
     }
 
     @Override
-    public int insertBestelling(MandjeForm form) {
+    public int insertBestelling(MandjeForm form, Mandje mandje) {
         Bestelbon bestelbon = new Bestelbon(
                 0,
                 form.getNaam(),
@@ -89,17 +89,20 @@ public class DefaultBierService implements BierService{
 
         int bestelbonid = bestelBonService.insertBestelBon(bestelbon);
 
-        for (int i = 0; i < form.getBestelLijnen().size(); i++) {
+        for (int i = 0; i < mandje.getBierIds().size(); i++) {
             BestelbonLijn bestelbonLijn = new BestelbonLijn(
                     bestelbonid,
-                    form.getBestelLijnen().get(i).getBierId(),
-                    form.getBestelLijnen().get(i).getAantalBakken(),
-                    form.getBestelLijnen().get(i).getBierPrijs()
+                    mandje.getBierIds().get(i),
+                    mandje.getBakken().get(i),
+                    new BigDecimal(0)
             );
+            int aantalBakkenBier = mandje.getBakken().get(i);
+            bierRepository.findById(mandje.getBierIds().get(i))
+                    .ifPresent(bier -> bestelbonLijn.setPrijs(
+                            bier.getPrijs().multiply(BigDecimal.valueOf(aantalBakkenBier))));
             bestelBonLijnService.insertBestelBonLijn(bestelbonLijn);
             // besteld bier verhogen
-            int aantalBakkenBier = form.getBestelLijnen().get(i).getAantalBakken();
-            bierRepository.findById(form.getBestelLijnen().get(i).getBierId())
+            bierRepository.findById(mandje.getBierIds().get(i))
                 .ifPresent(bier -> {
                     bier.setBesteld(bier.getBesteld() + aantalBakkenBier);
                     bierRepository.updateBier(bier);

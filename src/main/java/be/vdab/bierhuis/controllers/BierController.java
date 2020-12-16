@@ -27,7 +27,6 @@ public class BierController {
         bierService.findById(id).ifPresent(bier -> {
             modelAndView.addObject("bier", bier);
         });
-        modelAndView.addObject("mandje","r");
         return modelAndView;
     }
 

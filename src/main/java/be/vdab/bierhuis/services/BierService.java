@@ -16,5 +16,5 @@ public interface BierService {
     Optional<Bier> findById(int id);
     void updateBier(Bier bier);
     MandjeForm composeBestelLijstForm(Mandje mandje);
-    int insertBestelling(MandjeForm form);
+    int insertBestelling(MandjeForm form, Mandje mandje);
 }

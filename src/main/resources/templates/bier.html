@@ -5,10 +5,15 @@
 <nav th:replace="fragments::menu"></nav>
 <div th:if="${bier}" th:object="${bier}">
     <h1 th:text="*{naam}">Biernaam</h1>
-    <p>Alcohol</p>
-    <span th:text="*{alcohol}"></span> %
-    <p>Prijs</p>
-    <span th:text="*{prijs}"></span> €
+    <label>Alcohol</label>
+    <br>
+    <span th:text="*{{alcohol}}"></span> %
+    <br>
+    <label>Prijs</label>
+    <br>
+    <span th:text="*{{prijs}}"></span> €
+    <br>
+    <br>
 
     <form method="get" th:object="${aantalbakkenForm}"
           th:action="@{/mandje/{id} (id=${bier.id})}">

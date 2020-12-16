@@ -34,7 +34,6 @@ public class BrouwerController {
             modelAndView.addObject("brouwer", brouwer);
             modelAndView.addObject("bieren", bierService.findByBrouwer(brouwer));
         });
-        modelAndView.addObject("mandje","r");
         return modelAndView;
     }
 

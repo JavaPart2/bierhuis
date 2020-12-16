@@ -38,14 +38,14 @@ public class MandjeController {
     @GetMapping
     public ModelAndView toonMandje(){
         ModelAndView modelAndView = new ModelAndView("mandje");
-        modelAndView.addObject("mandjeForm", bierService.composeBestelLijstForm(mandje));
-        modelAndView.addObject("mandje","r");
+        modelAndView.addObject("mandjeForm",
+                bierService.composeBestelLijstForm(mandje));
         return modelAndView;
     }
 
     @PostMapping
     public ModelAndView bestellen(@Valid MandjeForm form, Errors errors){
-        int bestelbonid = bierService.insertBestelling(form);
+        int bestelbonid = bierService.insertBestelling(form, mandje);
         mandje.leegMaken();
         ModelAndView modelAndView = new ModelAndView("bestelling");
         modelAndView.addObject("bestelbonid", bestelbonid);

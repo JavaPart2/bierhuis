@@ -1,23 +1,65 @@
 body {
     font-family: sans-serif;
+    background-color: moccasin;
+    color: #40111F;
 }
 
 nav ul {
     padding: 0.4em 0;
+    background-color: moccasin;
 }
 
 nav li {
     display: inline;
+    background-color: moccasin;
 }
 
-nav li a {
-    font-weight: bold;
-    padding-left: 0.5em;
-    text-decoration: none;
-    text-underline: blue;
+nav li a .nav {
     vertical-align: middle;
+    background-color: moccasin;
 }
 
 nav li a:hover {
     color: lightblue;
+}
+
+ul {
+    list-style-type: none;
+    text-decoration: none;
+    width: 25em;
+}
+
+li a {
+    text-decoration: none;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 0.9em;
+}
+
+input, button {
+    display: block;
+    margin-bottom: 1em;
+    margin-top: 0.2em;
+}
+
+table{
+    background-color: transparent;
+}
+
+tr:nth-child(even) {
+    background-color: gold;
+}
+
+tr:nth-child(odd) {
+    background-color: lavender;
+}
+
+li:nth-child(even) {
+    background-color: gold;
+}
+
+li:nth-child(odd) {
+    background-color: lavender;
 }

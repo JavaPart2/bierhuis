@@ -7,14 +7,15 @@
     <link rel="stylesheet" th:href="@{/css/bierhuis.css}">
 </head>
 <body>
-<div xmlns:th="http://www.thymeleaf.org">
+<div>
     <nav th:fragment="menu">
         <ul>
-            <li><a th:href="@{/}">Welkom</a></li>
-            <li><a th:href="@{/brouwers}">Brouwers</a></li>
-            <li th:if="${mandje}"><a th:href="@{/mandje}">Mandje</a></li>
+            <li><a class="nav" th:href="@{/}">Welkom</a></li>
+            <li><a class="nav" th:href="@{/brouwers}">Brouwers</a></li>
+<!--            <li th:if="${mandje}"><a th:href="@{/mandje}">Mandje</a></li>-->
         </ul>
     </nav>
+<!--    <p th:text="${mandje}"></p>-->
 </div>
 </body>
 </html>

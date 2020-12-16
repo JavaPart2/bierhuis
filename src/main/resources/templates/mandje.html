@@ -9,8 +9,7 @@
     <div>
         <table>
             <thead>
-            <tr>
-                <th></th>
+            <tr style="background-color: moccasin">
                 <th>Bier</th>
                 <th>Prijs</th>
                 <th>Aantal</th>
@@ -19,32 +18,21 @@
             </thead>
             <tbody>
             <tr th:each="lijn:${mandjeForm.getBestelLijnen()}" th:object="${lijn}">
-                <td type = hidden th:name="bierId" th:value="*{bierId}"></td>
                 <td th:text="*{bierNaam}" th:name="*{bierNaam}" th:value="*{bierNaam}"></td>
                 <td th:text="*{{bierPrijs}}" th:name="*{bierPrijs}" th:value="*{bierPrijs}"></td>
                 <td th:text="*{aantalBakken}" th:name="*{aantalBakken}" th:value="*{aantalBakken}"></td>
                 <td th:text="*{{lijnTotaal}}" th:value="*{lijnTotaal}"></td>
             </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td th:text="Totaal"></td>
-                <td th:text="${{mandjeForm.totaal}}" th:value="${mandjeForm.totaal}"></td>
-            </tr>
             </tbody>
+            <tfoot>
+            <tr style="background-color: moccasin">
+                <td></td>
+                <td></td>
+                <td style="font-weight: bold">Totaal: </td>
+                <td style="font-weight: bold" th:text="${{mandjeForm.totaal}}" th:value="${mandjeForm.totaal}"></td>
+            </tr>
+            </tfoot>
         </table>
-
-<!--
-        <input th:each="bierlijn:${mandjeForm.bestelLijnen}" th:object="${bierlijn}"
-                   th:field="*{bierId}"/>
--->
-<!--
-            <input th:field="*{bierId}">
-            <input  th:field="*{bierNaam}">
-            <input th:field="*{bierPrijs}">
-            <input  th:field="*{aantalBakken}">
--->
     </div>
 
     <div>
