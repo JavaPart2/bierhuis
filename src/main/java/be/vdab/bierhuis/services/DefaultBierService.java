@@ -60,23 +60,6 @@ public class DefaultBierService implements BierService{
         List<BestelLijnForm> bestelLijnFormList = new ArrayList<>();
         BigDecimal bestelBonPrijsTotaal = new BigDecimal(0);
 
-        for (int i = 0; i < mandje.getBierIds().size(); i++) {
-            BestelLijnForm bestelLijnForm = new BestelLijnForm();
-
-            bierRepository.findById(mandje.getBierIds().get(i)).ifPresent(bier -> {
-                bestelLijnForm.setBierId(bier.getId());
-                bestelLijnForm.setBierNaam(bier.getNaam());
-                bestelLijnForm.setBierPrijs(bier.getPrijs());
-
-            });
-            bestelLijnForm.setAantalBakken(mandje.getBakken().get(i));
-            bestelLijnForm.setLijnTotaal(
-                    bestelLijnForm.getBierPrijs(),
-                    mandje.getBakken().get(i)
-            );
-            bestelBonPrijsTotaal = bestelBonPrijsTotaal.add(bestelLijnForm.getLijnTotaal());
-            bestelLijnFormList.add(bestelLijnForm);
-        }
         for (Map.Entry<Integer, Integer> i : mandje.getBestelLijnen().entrySet()){
             BestelLijnForm bestelLijnForm = new BestelLijnForm();
             bierRepository.findById(i.getKey()).ifPresent(bier -> {
@@ -84,7 +67,14 @@ public class DefaultBierService implements BierService{
                 bestelLijnForm.setBierNaam(bier.getNaam());
                 bestelLijnForm.setBierPrijs(bier.getPrijs());
             });
-        };
+            bestelLijnForm.setAantalBakken(i.getValue());
+            bestelLijnForm.setLijnTotaal(
+                    bestelLijnForm.getBierPrijs(),
+                    i.getValue()
+            );
+            bestelBonPrijsTotaal = bestelBonPrijsTotaal.add(bestelLijnForm.getLijnTotaal());
+            bestelLijnFormList.add(bestelLijnForm);
+        }
         mandjeForm.setBestelLijnen(bestelLijnFormList);
         mandjeForm.setTotaal(bestelBonPrijsTotaal);
         return mandjeForm;
@@ -103,26 +93,24 @@ public class DefaultBierService implements BierService{
 
         int bestelbonid = bestelBonService.insertBestelBon(bestelbon);
 
-        for (int i = 0; i < mandje.getBierIds().size(); i++) {
+        for (Map.Entry<Integer, Integer> i : mandje.getBestelLijnen().entrySet()){
             BestelbonLijn bestelbonLijn = new BestelbonLijn(
                     bestelbonid,
-                    mandje.getBierIds().get(i),
-                    mandje.getBakken().get(i),
+                    i.getKey(),
+                    i.getValue(),
                     new BigDecimal(0)
             );
-            int aantalBakkenBier = mandje.getBakken().get(i);
-            bierRepository.findById(mandje.getBierIds().get(i))
-                    .ifPresent(bier -> bestelbonLijn.setPrijs(
-                            bier.getPrijs().multiply(BigDecimal.valueOf(aantalBakkenBier))));
+            int aantalBakkenBier = i.getValue();
+            bierRepository.findById(i.getKey()).ifPresent(bier ->
+                bestelbonLijn.setPrijs(bier.getPrijs()
+                        .multiply(BigDecimal.valueOf(aantalBakkenBier))));
             bestelBonLijnService.insertBestelBonLijn(bestelbonLijn);
             // besteld bier verhogen
-            bierRepository.findById(mandje.getBierIds().get(i))
-                .ifPresent(bier -> {
-                    bier.setBesteld(bier.getBesteld() + aantalBakkenBier);
-                    bierRepository.updateBier(bier);
-                });
+            bierRepository.findById(i.getKey()).ifPresent(bier -> {
+                        bier.setBesteld(bier.getBesteld() + aantalBakkenBier);
+                        bierRepository.updateBier(bier);
+                    });
         }
-
         return bestelbonid;
     }
 }

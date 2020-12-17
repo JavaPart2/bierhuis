@@ -30,7 +30,7 @@ ul {
     width: 25em;
 }
 
-li a {
+ul[class="fliflop"] > li a {
     text-decoration: none;
 }
 

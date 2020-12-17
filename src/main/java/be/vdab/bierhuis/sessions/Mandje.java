@@ -18,6 +18,10 @@ public class Mandje implements Serializable {
     public Mandje() {
     }
 
+    public Boolean getGevuld() {
+        return gevuld;
+    }
+
     public Map<Integer, Integer> getBestelLijnen() {
         return bestelLijnen;
     }

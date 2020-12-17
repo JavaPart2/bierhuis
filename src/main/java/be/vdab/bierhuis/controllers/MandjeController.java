@@ -3,6 +3,7 @@ package be.vdab.bierhuis.controllers;
 import be.vdab.bierhuis.forms.AantalbakkenForm;
 import be.vdab.bierhuis.forms.MandjeForm;
 import be.vdab.bierhuis.services.BierService;
+import be.vdab.bierhuis.sessions.Mandje;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,14 +17,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("mandje")
 public class MandjeController {
-//    private final Mandje mandje;
+    private final Mandje mandje;
     private final BierService bierService;
-    private final MyControllerAdvice myControllerAdvice;
 
-    public MandjeController(BierService bierService, MyControllerAdvice myControllerAdvice) {
-//        this.mandje = mandje;
+    public MandjeController(Mandje mandje, BierService bierService) {
+        this.mandje = mandje;
         this.bierService = bierService;
-        this.myControllerAdvice = myControllerAdvice;
     }
 
     @GetMapping("{id}")
@@ -32,7 +31,7 @@ public class MandjeController {
         if (errors.hasErrors()){
             return "redirect:/bieren/" + id + "/form";
         }
-        myControllerAdvice.getMandje().voegToe(id, form.getAantalBakken());
+        mandje.voegToe(id, form.getAantalBakken());
         return "redirect:/mandje";
     }
 
@@ -40,14 +39,14 @@ public class MandjeController {
     public ModelAndView toonMandje(){
         ModelAndView modelAndView = new ModelAndView("mandje");
         modelAndView.addObject("mandjeForm",
-                bierService.composeBestelLijstForm(myControllerAdvice.getMandje()));
+                bierService.composeBestelLijstForm(mandje));
         return modelAndView;
     }
 
     @PostMapping
     public ModelAndView bestellen(@Valid MandjeForm form, Errors errors){
-        int bestelbonid = bierService.insertBestelling(form, myControllerAdvice.getMandje());
-        myControllerAdvice.getMandje().leegMaken();
+        int bestelbonid = bierService.insertBestelling(form, mandje);
+        mandje.leegMaken();
         ModelAndView modelAndView = new ModelAndView("bestelling");
         modelAndView.addObject("bestelbonid", bestelbonid);
         return modelAndView;

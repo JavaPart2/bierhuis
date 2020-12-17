@@ -12,11 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("bieren")
 public class BierController {
     private final BierService bierService;
-    private final MyControllerAdvice myControllerAdvice;
 
-    public BierController(BierService bierService, MyControllerAdvice myControllerAdvice) {
+    public BierController(BierService bierService) {
         this.bierService = bierService;
-        this.myControllerAdvice = myControllerAdvice;
     }
 
     @GetMapping("{id}/form")

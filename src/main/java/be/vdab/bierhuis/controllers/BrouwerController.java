@@ -13,12 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class BrouwerController {
     private final BrouwerService brouwerService;
     private final BierService bierService;
-    private final MyControllerAdvice myControllerAdvice;
 
-    public BrouwerController(BrouwerService brouwerService, BierService bierService, MyControllerAdvice myControllerAdvice) {
+    public BrouwerController(BrouwerService brouwerService, BierService bierService) {
         this.brouwerService = brouwerService;
         this.bierService = bierService;
-        this.myControllerAdvice = myControllerAdvice;
     }
 
     @GetMapping
