@@ -1,6 +1,5 @@
 package be.vdab.bierhuis.controllers;
 
-import be.vdab.bierhuis.domain.Brouwer;
 import be.vdab.bierhuis.services.BierService;
 import be.vdab.bierhuis.services.BrouwerService;
 import org.springframework.stereotype.Controller;
@@ -14,10 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class BrouwerController {
     private final BrouwerService brouwerService;
     private final BierService bierService;
+    private final MyControllerAdvice myControllerAdvice;
 
-    public BrouwerController(BrouwerService brouwerService, BierService bierService) {
+    public BrouwerController(BrouwerService brouwerService, BierService bierService, MyControllerAdvice myControllerAdvice) {
         this.brouwerService = brouwerService;
         this.bierService = bierService;
+        this.myControllerAdvice = myControllerAdvice;
     }
 
     @GetMapping

@@ -5,7 +5,7 @@
 <nav th:replace="fragments::menu"></nav>
 <div th:if="${brouwers}">
     <h1>Brouwers</h1>
-    <ul>
+    <ul class="fliflop">
         <li th:each="brouwer:${brouwers}">
             <a th:text="|${brouwer.naam} (${brouwer.gemeente})|" th:href="@{/brouwers/{id}(id=${brouwer.id})}"></a>
         </li>
@@ -13,7 +13,7 @@
 </div>
 <div th:if="${bieren}">
     <h1 th:text="|${brouwer.naam} (${brouwer.gemeente})|"></h1>
-    <ul>
+    <ul class="fliflop">
         <li th:each="bier:${bieren}">
             <a th:text="${bier.naam}" th:href="@{/bieren/{id}/form(id=${bier.id})}"></a>
         </li>

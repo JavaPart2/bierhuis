@@ -1,10 +1,15 @@
 package be.vdab.bierhuis.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class Bestelbon {
     private final int id;
     private final String naam;
     private final String straat;
     private final String huisNr;
+    @Min(1000)
+    @Max(9999)
     private final int postcode;
     private final String gemeente;
 

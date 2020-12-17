@@ -10,9 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class IndexController {
     private final BierService bierService;
+    private final MyControllerAdvice myControllerAdvice;
 
-    public IndexController(BierService bierService) {
+
+    public IndexController(BierService bierService, MyControllerAdvice myControllerAdvice) {
         this.bierService = bierService;
+        this.myControllerAdvice = myControllerAdvice;
     }
 
     @GetMapping

@@ -1,13 +1,17 @@
 package be.vdab.bierhuis.forms;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import java.math.BigDecimal;
 
 public class BestelLijnForm {
 
     private int bierId;
     private String bierNaam;
+    @NumberFormat(pattern = "0.00")
     private BigDecimal bierPrijs;
     private int aantalBakken;
+    @NumberFormat(pattern = "0.00")
     private BigDecimal lijnTotaal;
 
     public BestelLijnForm(int bierId, String bierNaam,

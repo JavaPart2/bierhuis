@@ -11,7 +11,8 @@ import java.util.*;
 public class Mandje implements Serializable {
     private static final int serialVersionUID = 1;
     private final List<Integer> bierIds = new ArrayList<>();
-    private List<Integer> bakken = new ArrayList<>();
+    private final List<Integer> bakken = new ArrayList<>();
+    private Boolean gevuld;
     private final Map<Integer,Integer> bestelLijnen = new LinkedHashMap<>();
 
     public Mandje() {
@@ -29,10 +30,6 @@ public class Mandje implements Serializable {
         return bakken;
     }
 
-    public void setBakken(List<Integer> bakken) {
-        this.bakken = bakken;
-    }
-
     public void voegToe(int id, int bakken){
         if (bierIds.contains(id)){
             int index = bierIds.indexOf(id);
@@ -41,12 +38,19 @@ public class Mandje implements Serializable {
         }else {
             this.bierIds.add(id);
             this.bakken.add(bakken);
+            this.gevuld = true;
+        }
+        if (this.bestelLijnen.putIfAbsent(id, bakken) != null){
+            this.bestelLijnen.replace(id, this.bestelLijnen.get(id),
+                    this.bestelLijnen.get(id) + bakken);
         }
     }
 
     public void leegMaken() {
         this.bierIds.clear();
         this.bakken.clear();
+        this.bestelLijnen.clear();
+        this.gevuld = false;
 
     }
 }

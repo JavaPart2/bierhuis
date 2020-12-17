@@ -1,10 +1,12 @@
 package be.vdab.bierhuis.domain;
 
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 public class BestelbonLijn {
     private final int bestelbon;
     private final int bier;
+    @Min(2)
     private int aantal;
     private BigDecimal prijs;
 

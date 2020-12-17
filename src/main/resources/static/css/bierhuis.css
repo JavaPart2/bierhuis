@@ -14,9 +14,10 @@ nav li {
     background-color: moccasin;
 }
 
-nav li a .nav {
+nav li a {
     vertical-align: middle;
     background-color: moccasin;
+    margin-right: 1em;
 }
 
 nav li a:hover {
@@ -48,18 +49,26 @@ table{
     background-color: transparent;
 }
 
-tr:nth-child(even) {
+tfoot {
+    font-weight: bold;
+}
+
+.prijs {
+    text-align: right;
+}
+
+tbody > tr:nth-child(even) {
     background-color: gold;
 }
 
-tr:nth-child(odd) {
+tbody > tr:nth-child(odd) {
     background-color: lavender;
 }
 
-li:nth-child(even) {
+ul[class="fliflop"] > li:nth-child(even){
     background-color: gold;
 }
 
-li:nth-child(odd) {
+ul[class="fliflop"] > li:nth-child(odd) {
     background-color: lavender;
 }

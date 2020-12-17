@@ -9,13 +9,17 @@ import be.vdab.bierhuis.forms.MandjeForm;
 import be.vdab.bierhuis.repositories.BierRepository;
 import be.vdab.bierhuis.sessions.Mandje;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class DefaultBierService implements BierService{
     private final BierRepository bierRepository;
     private final BestelBonService bestelBonService;
@@ -45,6 +49,7 @@ public class DefaultBierService implements BierService{
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void updateBier(Bier bier) {
         bierRepository.updateBier(bier);
     }
@@ -72,12 +77,21 @@ public class DefaultBierService implements BierService{
             bestelBonPrijsTotaal = bestelBonPrijsTotaal.add(bestelLijnForm.getLijnTotaal());
             bestelLijnFormList.add(bestelLijnForm);
         }
+        for (Map.Entry<Integer, Integer> i : mandje.getBestelLijnen().entrySet()){
+            BestelLijnForm bestelLijnForm = new BestelLijnForm();
+            bierRepository.findById(i.getKey()).ifPresent(bier -> {
+                bestelLijnForm.setBierId(i.getKey());
+                bestelLijnForm.setBierNaam(bier.getNaam());
+                bestelLijnForm.setBierPrijs(bier.getPrijs());
+            });
+        };
         mandjeForm.setBestelLijnen(bestelLijnFormList);
         mandjeForm.setTotaal(bestelBonPrijsTotaal);
         return mandjeForm;
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public int insertBestelling(MandjeForm form, Mandje mandje) {
         Bestelbon bestelbon = new Bestelbon(
                 0,

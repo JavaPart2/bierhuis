@@ -12,10 +12,9 @@
         <ul>
             <li><a class="nav" th:href="@{/}">Welkom</a></li>
             <li><a class="nav" th:href="@{/brouwers}">Brouwers</a></li>
-<!--            <li th:if="${mandje}"><a th:href="@{/mandje}">Mandje</a></li>-->
+            <li th:if="${mandje.gevuld}"><a th:href="@{/mandje}">Mandje</a></li>
         </ul>
     </nav>
-<!--    <p th:text="${mandje}"></p>-->
 </div>
 </body>
 </html>

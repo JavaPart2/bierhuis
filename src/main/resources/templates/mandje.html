@@ -19,17 +19,17 @@
             <tbody>
             <tr th:each="lijn:${mandjeForm.getBestelLijnen()}" th:object="${lijn}">
                 <td th:text="*{bierNaam}" th:name="*{bierNaam}" th:value="*{bierNaam}"></td>
-                <td th:text="*{{bierPrijs}}" th:name="*{bierPrijs}" th:value="*{bierPrijs}"></td>
-                <td th:text="*{aantalBakken}" th:name="*{aantalBakken}" th:value="*{aantalBakken}"></td>
-                <td th:text="*{{lijnTotaal}}" th:value="*{lijnTotaal}"></td>
+                <td class="prijs" th:text="*{{bierPrijs}}" th:name="*{bierPrijs}" th:value="*{bierPrijs}"></td>
+                <td style="text-align: center" th:text="*{aantalBakken}" th:name="*{aantalBakken}" th:value="*{aantalBakken}"></td>
+                <td class="prijs" th:text="*{{lijnTotaal}}" th:value="*{lijnTotaal}"></td>
             </tr>
             </tbody>
             <tfoot>
             <tr style="background-color: moccasin">
                 <td></td>
                 <td></td>
-                <td style="font-weight: bold">Totaal: </td>
-                <td style="font-weight: bold" th:text="${{mandjeForm.totaal}}" th:value="${mandjeForm.totaal}"></td>
+                <td>Totaal: </td>
+                <td class="prijs" th:text="${{mandjeForm.totaal}}" th:value="${mandjeForm.totaal}"></td>
             </tr>
             </tfoot>
         </table>
@@ -46,12 +46,11 @@
             <input th:field="*{huisNr}" autofocus required>
         </label>
         <label>Postcode <span th:errors="*{postcode}"></span>
-            <input th:field="*{postcode}" autofocus required >
+            <input type="number" th:field="*{postcode}" autofocus required min="1000" max="9999">
         </label>
         <label>Gemeente <span th:errors="*{gemeente}"></span>
             <input th:field="*{gemeente}" autofocus required>
         </label>
-<!--        <input type="hidden" name="id" value="0"/>-->
         <button>Als bestelbon bevestigen</button>
     </div>
 </form>

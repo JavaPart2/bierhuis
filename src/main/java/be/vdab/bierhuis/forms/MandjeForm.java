@@ -1,15 +1,22 @@
 package be.vdab.bierhuis.forms;
 
+import org.springframework.format.annotation.NumberFormat;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.util.List;
 
 public class MandjeForm {
 
     private List<BestelLijnForm> bestelLijnen;
+    @NumberFormat(pattern = "0.00")
     private BigDecimal totaal;
     private String naam;
     private String straat;
     private String huisNr;
+    @Min(1000)
+    @Max(9999)
     private int postcode;
     private String gemeente;
 
